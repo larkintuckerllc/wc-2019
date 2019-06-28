@@ -1,0 +1,22 @@
+{
+  "name": "wc-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@webcomponents/webcomponentsjs": "^2.2.10"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.5.2"
+  }
+}
