@@ -1,16 +1,8 @@
+import template from './template.html';
+
 (() => {
-  const template = document.createElement('template');
-  template.innerHTML = `
-  <style>
-    #root {
-      text-align: center;
-    }
-  </style>
-  <div id="root">
-    <span id="root__value"></span>
-    <button id="root__button">Increment</button>
-  </div>
-  `;
+  const templateEl = document.createElement('template');
+  templateEl.innerHTML = template;
   class HelloWorld extends HTMLElement {
     private buttonEl: HTMLElement | null = null;
     private value = 0;
@@ -19,7 +11,7 @@
     constructor() {
       super();
       const shadow = this.attachShadow({ mode: 'closed' });
-      shadow.appendChild(template.content.cloneNode(true));
+      shadow.appendChild(templateEl.content.cloneNode(true));
       this.valueEl = shadow.getElementById('root__value');
       this.buttonEl = shadow.getElementById('root__button');
       if (this.valueEl === null || this.buttonEl === null) {
