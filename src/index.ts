@@ -1,4 +1,16 @@
 (() => {
+  const template = document.createElement('template');
+  template.innerHTML = `
+  <style>
+    #root {
+      text-align: center;
+    }
+  </style>
+  <div id="root">
+    <span id="root__value"></span>
+    <button id="root__button">Increment</button>
+  </div>
+  `;
   class HelloWorld extends HTMLElement {
     private buttonEl: HTMLElement | null = null;
     private value = 0;
@@ -7,25 +19,14 @@
     constructor() {
       super();
       const shadow = this.attachShadow({ mode: 'closed' });
-      const styleEl = document.createElement('style');
-      styleEl.textContent = `
-      #root {
-        text-align: center;
+      shadow.appendChild(template.content.cloneNode(true));
+      this.valueEl = shadow.getElementById('root__value');
+      this.buttonEl = shadow.getElementById('root__button');
+      if (this.valueEl === null || this.buttonEl === null) {
+        return;
       }
-      `;
-      const rootEl = document.createElement('div');
-      rootEl.id = 'root';
-      this.valueEl = document.createElement('div');
-      this.valueEl.id = 'root__value';
       this.valueEl.textContent = this.value.toString();
-      this.buttonEl = document.createElement('button');
-      this.buttonEl.id = 'root__button';
-      this.buttonEl.textContent = 'Increment';
       this.buttonEl.addEventListener('click', this.handleClick);
-      shadow.appendChild(styleEl);
-      rootEl.appendChild(this.valueEl);
-      rootEl.appendChild(this.buttonEl);
-      shadow.appendChild(rootEl);
     }
 
     public disconnectedCallback() {

@@ -13,6 +13,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 (function () {
+    var template = document.createElement('template');
+    template.innerHTML = "\n  <style>\n    #root {\n      text-align: center;\n    }\n  </style>\n  <div id=\"root\">\n    <span id=\"root__value\"></span>\n    <button id=\"root__button\">Increment</button>\n  </div>\n  ";
     var HelloWorld = /** @class */ (function (_super) {
         __extends(HelloWorld, _super);
         function HelloWorld() {
@@ -28,21 +30,14 @@ var __extends = (this && this.__extends) || (function () {
                 _this.valueEl.textContent = _this.value.toString();
             };
             var shadow = _this.attachShadow({ mode: 'closed' });
-            var styleEl = document.createElement('style');
-            styleEl.textContent = "\n      #root {\n        text-align: center;\n      }\n      ";
-            var rootEl = document.createElement('div');
-            rootEl.id = 'root';
-            _this.valueEl = document.createElement('div');
-            _this.valueEl.id = 'root__value';
+            shadow.appendChild(template.content.cloneNode(true));
+            _this.valueEl = shadow.getElementById('root__value');
+            _this.buttonEl = shadow.getElementById('root__button');
+            if (_this.valueEl === null || _this.buttonEl === null) {
+                return _this;
+            }
             _this.valueEl.textContent = _this.value.toString();
-            _this.buttonEl = document.createElement('button');
-            _this.buttonEl.id = 'root__button';
-            _this.buttonEl.textContent = 'Increment';
             _this.buttonEl.addEventListener('click', _this.handleClick);
-            shadow.appendChild(styleEl);
-            rootEl.appendChild(_this.valueEl);
-            rootEl.appendChild(_this.buttonEl);
-            shadow.appendChild(rootEl);
             return _this;
         }
         HelloWorld.prototype.disconnectedCallback = function () {
