@@ -16,7 +16,7 @@ class HelloView extends HTMLElement {
     shadow.appendChild(templateEl.content.cloneNode(true));
     this.valueEl = shadow.getElementById('root__value');
     this.buttonEl = shadow.getElementById('root__button');
-    if (this.valueEl === null || this.buttonEl === null) {
+    if (this.buttonEl === null) {
       return;
     }
     this.buttonEl.addEventListener('click', this.handleClick);
