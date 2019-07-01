@@ -1,31 +1,21 @@
+import { customElement, html, LitElement, property } from 'lit-element';
 import './helloView';
 
-class HelloWorld extends HTMLElement {
-  private helloViewEl: HTMLElement | null = null;
+@customElement('hello-world')
+class HelloWorld extends LitElement {
+  @property({ type: Number })
   private value = 0;
 
-  constructor() {
-    super();
-    const shadow = this.attachShadow({ mode: 'closed' });
-    this.helloViewEl = document.createElement('hello-view');
-    this.helloViewEl.setAttribute('value', this.value.toString());
-    this.helloViewEl.addEventListener('increment', this.handleIncrement);
-    shadow.appendChild(this.helloViewEl);
+  public render() {
+    return html`
+      <hello-view
+        @increment="${this.handleIncrement}"
+        value="${this.value.toString()}"
+      ></hello-view>
+    `;
   }
 
-  public disconnectedCallback() {
-    if (this.helloViewEl === null) {
-      return;
-    }
-    this.helloViewEl.removeEventListener('increment', this.handleIncrement);
-  }
-
-  private handleIncrement = () => {
-    if (this.helloViewEl === null) {
-      return;
-    }
+  private handleIncrement() {
     this.value += 1;
-    this.helloViewEl.setAttribute('value', this.value.toString());
-  };
+  }
 }
-window.customElements.define('hello-world', HelloWorld);
