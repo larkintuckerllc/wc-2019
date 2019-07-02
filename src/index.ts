@@ -1,3 +1,4 @@
+/*
 import { customElement, html, LitElement, property } from 'lit-element';
 import './helloView';
 
@@ -19,3 +20,4 @@ class HelloWorld extends LitElement {
     this.value += 1;
   }
 }
+*/

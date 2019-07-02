@@ -18,15 +18,6 @@ module.exports = env => {
           use: 'ts-loader',
           exclude: /node_modules/
         },
-        {
-          test: /\.(html)$/,
-          use: {
-            loader: 'html-loader',
-            options: {
-              attrs: false,
-            },
-          },
-        },
       ],
     },
     resolve: {
@@ -42,7 +33,6 @@ module.exports = env => {
         { from: 'node_modules/@webcomponents/webcomponentsjs', to: 'webcomponentsjs' },
       ]),
       new HtmlWebpackPlugin({
-        inject: 'head',
         template: 'public/index.html'
       })
     ]
